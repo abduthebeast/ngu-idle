@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NGU Idle Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>NGU Idle Clone</h1>
+
+  <div class="tabs">
+    <button onclick="showTab('energy')">⚡ Energy</button>
+    <button onclick="showTab('adventure')">🗡️ Adventure</button>
+    <button onclick="saveGame()">💾 Save</button>
+    <button onclick="loadGame()">📂 Load</button>
+  </div>
+
+  <div id="energy" class="tab">
+    <h2>Energy</h2>
+    <p>Energy: <span id="energyAmount">0</span></p>
+    <button onclick="spendEnergy()">Use 10 Energy → +1 Power</button>
+    <p>Power: <span id="powerAmount">0</span></p>
+  </div>
+
+  <div id="adventure" class="tab hidden">
+    <h2>Adventure</h2>
+    <p>Enemy HP: <span id="enemyHP">10</span></p>
+    <button onclick="attackEnemy()">Attack</button>
+    <p>Enemy Defeated: <span id="kills">0</span></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
