@@ -1,132 +1,109 @@
-let energy = 0, mana = 0, power = 0, spellPower = 0, augmentPower = 0;
-let enemyHP = 10, kills = 0, weapon = "None", weaponBonus = 0;
-let timeJuice = 0, rebirthPoints = 0, totalEnergy = 0, totalMana = 0;
-
-function updateUI() {
-  document.getElementById("energyAmount").textContent = energy;
-  document.getElementById("mana").textContent = mana;
-  document.getElementById("powerAmount").textContent = power;
-  document.getElementById("spellPower").textContent = spellPower;
-  document.getElementById("augmentPower").textContent = augmentPower;
-  document.getElementById("enemyHP").textContent = enemyHP;
-  document.getElementById("kills").textContent = kills;
-  document.getElementById("weapon").textContent = weapon;
-  document.getElementById("timeJuice").textContent = timeJuice;
-  document.getElementById("rebirthPoints").textContent = rebirthPoints;
-  document.getElementById("statEnergy").textContent = totalEnergy;
-  document.getElementById("statMana").textContent = totalMana;
-  document.getElementById("rebirthMult").textContent = (1 + rebirthPoints * 0.1).toFixed(2) + "x";
+// Helper for scientific notation
+function formatNum(n) {
+  return n.toExponential(3).replace('+', '').toUpperCase();
 }
 
-function showTab(name) {
+let stats = {
+  energy: 1e0,
+  mana: 1e0,
+  blood: 0,
+  hp: 100,
+  atk: 1,
+  def: 0,
+  gold: 0,
+  rebirthTime: 0,
+  playerHP: 100,
+  enemyHP: 325000000,
+  rebirths: 0,
+};
+
+function updateStats() {
+  document.getElementById("stat-energy").textContent = formatNum(stats.energy);
+  document.getElementById("stat-mana").textContent = formatNum(stats.mana);
+  document.getElementById("stat-blood").textContent = stats.blood;
+  document.getElementById("stat-hp").textContent = stats.hp;
+  document.getElementById("stat-atk").textContent = stats.atk;
+  document.getElementById("stat-def").textContent = stats.def;
+  document.getElementById("stat-gold").textContent = stats.gold;
+  document.getElementById("stat-rebirth-time").textContent = stats.rebirthTime.toFixed(1) + "s";
+  document.getElementById("player-hp").textContent = stats.playerHP;
+  document.getElementById("enemy-hp").textContent = formatNum(stats.enemyHP);
+}
+
+function showTab(id) {
   document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-  document.getElementById(name).classList.add('active');
-}
-
-setInterval(() => {
-  let mult = 1 + rebirthPoints * 0.1;
-  energy += Math.floor(1 * mult);
-  mana += Math.floor(2 * mult);
-  totalEnergy += Math.floor(1 * mult);
-  totalMana += Math.floor(2 * mult);
-  updateUI();
-}, 1000);
-
-function spendEnergy() {
-  if (energy >= 10) {
-    energy -= 10;
-    power++;
-    updateUI();
-  }
-}
-
-function castMagic() {
-  if (mana >= 20) {
-    mana -= 20;
-    spellPower++;
-    updateUI();
-  }
-}
-
-function upgradeAugment() {
-  if (energy >= 50) {
-    energy -= 50;
-    augmentPower++;
-    updateUI();
-  }
-}
-
-function attackEnemy() {
-  let damage = power + spellPower + augmentPower + weaponBonus || 1;
-  enemyHP -= damage;
-  if (enemyHP <= 0) {
-    enemyHP = 10;
-    kills++;
-  }
-  updateUI();
-}
-
-function equipWeapon() {
-  if (weapon === "None") {
-    weapon = "Sword";
-    weaponBonus = 5;
-    updateUI();
-  }
-}
-
-function boostTime() {
-  if (energy >= 100) {
-    energy -= 100;
-    timeJuice++;
-    updateUI();
-  }
+  document.getElementById("tab-" + id).classList.add('active');
 }
 
 function rebirth() {
-  if (power >= 10 || spellPower >= 10 || kills >= 10) {
-    rebirthPoints++;
-    energy = mana = power = spellPower = augmentPower = timeJuice = kills = 0;
-    enemyHP = 10;
-    weapon = "None";
-    weaponBonus = 0;
-    updateUI();
+  if (stats.atk >= 10 || stats.gold >= 1000) {
+    stats.rebirths++;
+    stats.energy = 1;
+    stats.mana = 1;
+    stats.blood = 0;
+    stats.hp = 100;
+    stats.atk = 1;
+    stats.def = 0;
+    stats.gold = 0;
+    stats.playerHP = 100;
+    stats.enemyHP = 325000000;
+    stats.rebirthTime = 0;
+    updateStats();
+    alert("You have rebirthed! Total Rebirths: " + stats.rebirths);
   } else {
-    alert("You need at least 10 power, spell power, or kills to rebirth.");
+    alert("Not strong enough to rebirth yet!");
+  }
+}
+
+function fight() {
+  let playerDamage = stats.atk;
+  let enemyDamage = 10;
+
+  stats.enemyHP -= playerDamage;
+  stats.playerHP -= enemyDamage;
+
+  if (stats.enemyHP <= 0) {
+    stats.gold += 100;
+    stats.enemyHP = 325000000;
+    alert("Victory! You gained 100 gold.");
+  }
+  if (stats.playerHP <= 0) {
+    stats.playerHP = 100;
+    stats.gold = Math.max(0, stats.gold - 50);
+    alert("You died! Lost 50 gold.");
+  }
+  updateStats();
+}
+
+function nuke() {
+  if (stats.energy >= 1e4) {
+    stats.energy -= 1e4;
+    stats.enemyHP = 0;
+    fight();
+  } else {
+    alert("Not enough Energy to Nuke!");
   }
 }
 
 function saveGame() {
-  const save = {
-    energy, mana, power, spellPower, augmentPower, enemyHP,
-    kills, weapon, weaponBonus, timeJuice, rebirthPoints,
-    totalEnergy, totalMana
-  };
-  localStorage.setItem("nguIdleSave", JSON.stringify(save));
-  alert("Game saved!");
+  localStorage.setItem("nguSave", JSON.stringify(stats));
+  alert("Game Saved!");
 }
 
 function loadGame() {
-  const save = localStorage.getItem("nguIdleSave");
+  const save = JSON.parse(localStorage.getItem("nguSave"));
   if (save) {
-    const data = JSON.parse(save);
-    energy = data.energy;
-    mana = data.mana;
-    power = data.power;
-    spellPower = data.spellPower;
-    augmentPower = data.augmentPower;
-    enemyHP = data.enemyHP;
-    kills = data.kills;
-    weapon = data.weapon;
-    weaponBonus = data.weaponBonus;
-    timeJuice = data.timeJuice;
-    rebirthPoints = data.rebirthPoints;
-    totalEnergy = data.totalEnergy;
-    totalMana = data.totalMana;
-    updateUI();
-    alert("Game loaded!");
-  } else {
-    alert("No save found.");
+    stats = { ...stats, ...save };
+    updateStats();
+    alert("Game Loaded!");
   }
 }
 
-updateUI();
+setInterval(() => {
+  stats.energy *= 1.01;
+  stats.mana *= 1.02;
+  stats.rebirthTime += 0.1;
+  updateStats();
+}, 100);
+
+updateStats();
