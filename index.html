@@ -4,34 +4,70 @@
   <meta charset="UTF-8">
   <title>NGU Idle Clone</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="container">
-    <!-- Left Sidebar -->
-    <div id="sidebar">
-      <h2>Tabs</h2>
-      <button onclick="showTab('energy')">Energy</button>
-      <button onclick="showTab('magic')">Magic</button>
-      <button onclick="showTab('augments')">Augments</button>
-      <button onclick="showTab('adventure')">Adventure</button>
-      <button onclick="showTab('equipment')">Inventory</button>
-      <button onclick="showTab('time')">Time Machine</button>
-      <button onclick="showTab('rebirth')">Rebirth</button>
+  <div id="game-wrapper">
+
+    <!-- Left Stats Panel -->
+    <div id="left-panel" class="panel">
+      <h2>STATS</h2>
+      <div class="stat-box" style="background-color: #2a3c60; color: #7fffd4;">E: <span id="stat-energy">1.00E+0</span></div>
+      <div class="stat-box" style="background-color: #392b4a; color: #dda0dd;">M: <span id="stat-mana">1.00E+0</span></div>
+      <div class="stat-box" style="background-color: #4a2b2b; color: #ff7373;">B: <span id="stat-blood">0</span></div>
+      <hr>
+      <div class="stat-line">HP: <span id="stat-hp">100</span></div>
+      <div class="stat-line">Attack: <span id="stat-atk">1</span></div>
+      <div class="stat-line">Defense: <span id="stat-def">0</span></div>
+      <div class="stat-line">Gold: <span id="stat-gold">0</span></div>
+      <hr>
+      <div class="stat-line">Rebirth Time: <span id="stat-rebirth-time">0.0s</span></div>
+      <button onclick="rebirth()">Rebirth</button>
       <button onclick="saveGame()">Save</button>
       <button onclick="loadGame()">Load</button>
     </div>
 
-    <!-- Main Game Panel -->
-    <div id="main">
-      <!-- All tabs go here as separate <div class="tab"> blocks -->
+    <!-- Center Feature Tabs -->
+    <div id="center-panel" class="panel">
+      <h2>FEATURES</h2>
+      <div id="feature-buttons">
+        <button onclick="showTab('basic')">Basic Training</button>
+        <button onclick="showTab('fight')">Fight Boss</button>
+        <button onclick="showTab('money')">Money Pit</button>
+        <button onclick="showTab('adventure')">Adventure</button>
+        <button onclick="showTab('inventory')">Inventory</button>
+        <button onclick="showTab('ngu')">NGU</button>
+        <!-- Add more as needed -->
+      </div>
     </div>
 
-    <!-- Right Stats Panel -->
-    <div id="stats">
-      <h2>Stats</h2>
-      <p>Total Energy: <span id="statEnergy">0</span></p>
-      <p>Total Mana: <span id="statMana">0</span></p>
-      <p>Rebirth Multiplier: <span id="rebirthMult">1.00x</span></p>
+    <!-- Right Content View -->
+    <div id="right-panel" class="panel">
+      <div id="tab-basic" class="tab active">
+        <h2>Basic Training</h2>
+        <p>Train your Energy and Magic stats here.</p>
+      </div>
+      <div id="tab-fight" class="tab">
+        <h2>BOSS FIGHT</h2>
+        <div class="fight-panel">
+          <div class="character">
+            <h3>YOU</h3>
+            <div class="sprite-placeholder">[CHARACTER SPRITE]</div>
+            <div>HP: <span id="player-hp">100</span></div>
+          </div>
+          <div class="character">
+            <h3>A LARGE RAT</h3>
+            <div class="sprite-placeholder">[RAT SPRITE]</div>
+            <div>HP: <span id="enemy-hp">325.000E+6</span></div>
+          </div>
+        </div>
+        <button onclick="fight()">FIGHT</button>
+        <button onclick="nuke()">NUKE</button>
+        <p class="story-box">
+          You start feeling lost in the identical looking passageways, dripping with all sorts of goopy brown waste...
+        </p>
+      </div>
+      <!-- Additional tab panels go here -->
     </div>
   </div>
   <script src="script.js"></script>
