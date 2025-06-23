@@ -1,76 +1,71 @@
-// Game State
-let energy = 0;
-let power = 0;
-let mana = 0;
-let spellPower = 0;
-let augmentPower = 0;
-let timeJuice = 0;
-let enemyHP = 10;
-let kills = 0;
-let weapon = "None";
-let weaponBonus = 0;
+let energy = 0, mana = 0, power = 0, spellPower = 0, augmentPower = 0;
+let enemyHP = 10, kills = 0, weapon = "None", weaponBonus = 0;
+let timeJuice = 0, rebirthPoints = 0, totalEnergy = 0, totalMana = 0;
 
-// DOM references
-const energyDisplay = document.getElementById("energyAmount");
-const powerDisplay = document.getElementById("powerAmount");
-const manaDisplay = document.getElementById("mana");
-const spellPowerDisplay = document.getElementById("spellPower");
-const augmentDisplay = document.getElementById("augmentPower");
-const enemyHPDisplay = document.getElementById("enemyHP");
-const killsDisplay = document.getElementById("kills");
-const weaponDisplay = document.getElementById("weapon");
-const timeJuiceDisplay = document.getElementById("timeJuice");
+function updateUI() {
+  document.getElementById("energyAmount").textContent = energy;
+  document.getElementById("mana").textContent = mana;
+  document.getElementById("powerAmount").textContent = power;
+  document.getElementById("spellPower").textContent = spellPower;
+  document.getElementById("augmentPower").textContent = augmentPower;
+  document.getElementById("enemyHP").textContent = enemyHP;
+  document.getElementById("kills").textContent = kills;
+  document.getElementById("weapon").textContent = weapon;
+  document.getElementById("timeJuice").textContent = timeJuice;
+  document.getElementById("rebirthPoints").textContent = rebirthPoints;
+  document.getElementById("statEnergy").textContent = totalEnergy;
+  document.getElementById("statMana").textContent = totalMana;
+  document.getElementById("rebirthMult").textContent = (1 + rebirthPoints * 0.1).toFixed(2) + "x";
+}
 
-// Energy and Mana gain
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+}
+
 setInterval(() => {
-  energy += 1;
-  mana += 2;
+  let mult = 1 + rebirthPoints * 0.1;
+  energy += Math.floor(1 * mult);
+  mana += Math.floor(2 * mult);
+  totalEnergy += Math.floor(1 * mult);
+  totalMana += Math.floor(2 * mult);
   updateUI();
 }, 1000);
 
-// Tabs
-function showTab(name) {
-  document.querySelectorAll('.tab').forEach(tab => tab.classList.add('hidden'));
-  document.getElementById(name).classList.remove('hidden');
-}
-
-// Energy System
 function spendEnergy() {
   if (energy >= 10) {
     energy -= 10;
-    power += 1;
+    power++;
     updateUI();
   }
 }
 
-// Magic System
 function castMagic() {
   if (mana >= 20) {
     mana -= 20;
-    spellPower += 1;
+    spellPower++;
     updateUI();
   }
 }
 
-// Augments
 function upgradeAugment() {
   if (energy >= 50) {
     energy -= 50;
-    augmentPower += 1;
+    augmentPower++;
     updateUI();
   }
 }
 
-// Time Machine
-function boostTime() {
-  if (energy >= 100) {
-    energy -= 100;
-    timeJuice += 1;
-    updateUI();
+function attackEnemy() {
+  let damage = power + spellPower + augmentPower + weaponBonus || 1;
+  enemyHP -= damage;
+  if (enemyHP <= 0) {
+    enemyHP = 10;
+    kills++;
   }
+  updateUI();
 }
 
-// Equipment
 function equipWeapon() {
   if (weapon === "None") {
     weapon = "Sword";
@@ -79,48 +74,43 @@ function equipWeapon() {
   }
 }
 
-// Adventure Combat
-function attackEnemy() {
-  const damage = (power + spellPower + weaponBonus + augmentPower) || 1;
-  enemyHP -= damage;
-  if (enemyHP <= 0) {
-    enemyHP = 10;
-    kills += 1;
+function boostTime() {
+  if (energy >= 100) {
+    energy -= 100;
+    timeJuice++;
+    updateUI();
   }
-  updateUI();
 }
 
-// UI
-function updateUI() {
-  energyDisplay.textContent = energy;
-  powerDisplay.textContent = power;
-  manaDisplay.textContent = mana;
-  spellPowerDisplay.textContent = spellPower;
-  augmentDisplay.textContent = augmentPower;
-  enemyHPDisplay.textContent = enemyHP;
-  killsDisplay.textContent = kills;
-  weaponDisplay.textContent = weapon;
-  timeJuiceDisplay.textContent = timeJuice;
+function rebirth() {
+  if (power >= 10 || spellPower >= 10 || kills >= 10) {
+    rebirthPoints++;
+    energy = mana = power = spellPower = augmentPower = timeJuice = kills = 0;
+    enemyHP = 10;
+    weapon = "None";
+    weaponBonus = 0;
+    updateUI();
+  } else {
+    alert("You need at least 10 power, spell power, or kills to rebirth.");
+  }
 }
 
-// Save/Load
 function saveGame() {
   const save = {
-    energy, power, mana, spellPower, augmentPower,
-    enemyHP, kills, weapon, weaponBonus, timeJuice,
-    lastSave: Date.now()
+    energy, mana, power, spellPower, augmentPower, enemyHP,
+    kills, weapon, weaponBonus, timeJuice, rebirthPoints,
+    totalEnergy, totalMana
   };
-  localStorage.setItem("nguSave", JSON.stringify(save));
-  alert("Game Saved!");
+  localStorage.setItem("nguIdleSave", JSON.stringify(save));
+  alert("Game saved!");
 }
 
 function loadGame() {
-  const save = localStorage.getItem("nguSave");
+  const save = localStorage.getItem("nguIdleSave");
   if (save) {
     const data = JSON.parse(save);
-    const offlineTime = Math.floor((Date.now() - data.lastSave) / 1000);
-    energy = data.energy + offlineTime;
-    mana = data.mana + (offlineTime * 2);
+    energy = data.energy;
+    mana = data.mana;
     power = data.power;
     spellPower = data.spellPower;
     augmentPower = data.augmentPower;
@@ -129,9 +119,14 @@ function loadGame() {
     weapon = data.weapon;
     weaponBonus = data.weaponBonus;
     timeJuice = data.timeJuice;
+    rebirthPoints = data.rebirthPoints;
+    totalEnergy = data.totalEnergy;
+    totalMana = data.totalMana;
     updateUI();
-    alert(`Loaded! You gained ${offlineTime} energy and ${offlineTime * 2} mana offline.`);
+    alert("Game loaded!");
   } else {
     alert("No save found.");
   }
 }
+
+updateUI();
