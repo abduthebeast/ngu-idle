@@ -6,57 +6,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>NGU Idle Clone</h1>
-  <div class="nav">
-    <button onclick="showTab('energy')">⚡ Energy</button>
-    <button onclick="showTab('magic')">✨ Magic</button>
-    <button onclick="showTab('augments')">🧬 Augments</button>
-    <button onclick="showTab('adventure')">🗡️ Adventure</button>
-    <button onclick="showTab('equipment')">🧥 Equipment</button>
-    <button onclick="showTab('time')">⏳ Time Machine</button>
-    <button onclick="saveGame()">💾 Save</button>
-    <button onclick="loadGame()">📂 Load</button>
-  </div>
+  <div id="container">
+    <!-- Left Sidebar -->
+    <div id="sidebar">
+      <h2>Tabs</h2>
+      <button onclick="showTab('energy')">Energy</button>
+      <button onclick="showTab('magic')">Magic</button>
+      <button onclick="showTab('augments')">Augments</button>
+      <button onclick="showTab('adventure')">Adventure</button>
+      <button onclick="showTab('equipment')">Inventory</button>
+      <button onclick="showTab('time')">Time Machine</button>
+      <button onclick="showTab('rebirth')">Rebirth</button>
+      <button onclick="saveGame()">Save</button>
+      <button onclick="loadGame()">Load</button>
+    </div>
 
-  <div class="tab" id="energy">
-    <h2>Energy</h2>
-    <p><span class="label">Energy:</span> <span id="energyAmount" class="value">0</span></p>
-    <button onclick="spendEnergy()">Use 10 Energy → +1 Power</button>
-    <p><span class="label">Power:</span> <span id="powerAmount" class="value">0</span></p>
-  </div>
+    <!-- Main Game Panel -->
+    <div id="main">
+      <!-- All tabs go here as separate <div class="tab"> blocks -->
+    </div>
 
-  <div class="tab hidden" id="magic">
-    <h2>Magic</h2>
-    <p><span class="label">Mana:</span> <span id="mana" class="value blue">0</span></p>
-    <button onclick="castMagic()">Use 20 Mana → +1 Spell Power</button>
-    <p><span class="label">Spell Power:</span> <span id="spellPower" class="value blue">0</span></p>
+    <!-- Right Stats Panel -->
+    <div id="stats">
+      <h2>Stats</h2>
+      <p>Total Energy: <span id="statEnergy">0</span></p>
+      <p>Total Mana: <span id="statMana">0</span></p>
+      <p>Rebirth Multiplier: <span id="rebirthMult">1.00x</span></p>
+    </div>
   </div>
-
-  <div class="tab hidden" id="augments">
-    <h2>Augments</h2>
-    <p><span class="label">Augment Power:</span> <span id="augmentPower" class="value purple">0</span></p>
-    <button onclick="upgradeAugment()">Use 50 Energy → +1 Augment</button>
-  </div>
-
-  <div class="tab hidden" id="adventure">
-    <h2>Adventure</h2>
-    <p><span class="label">Enemy HP:</span> <span id="enemyHP" class="value red">10</span></p>
-    <button onclick="attackEnemy()">Attack</button>
-    <p><span class="label">Enemies Defeated:</span> <span id="kills" class="value gold">0</span></p>
-  </div>
-
-  <div class="tab hidden" id="equipment">
-    <h2>Equipment</h2>
-    <p><span class="label">Equipped Weapon:</span> <span id="weapon" class="value">None</span></p>
-    <button onclick="equipWeapon()">Equip Sword (+5 Power)</button>
-  </div>
-
-  <div class="tab hidden" id="time">
-    <h2>Time Machine</h2>
-    <p><span class="label">Time Juice:</span> <span id="timeJuice" class="value cyan">0</span></p>
-    <button onclick="boostTime()">Use 100 Energy → +1 Time Juice</button>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>
