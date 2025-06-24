@@ -204,5 +204,169 @@ setInterval(() => {
   stats.rebirthTime += 0.1;
   updateStats();
 }, 100);
+function buyAtk1k() {
+  if (stats.energy >= 1_000) {
+    stats.energy -= 1_000;
+    stats.atk += 10;
+    updateStats();
+    logAdventure("You trained Attack (+10 ATK) using 1,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk3k() {
+  if (stats.energy >= 3_000) {
+    stats.energy -= 3_000;
+    stats.atk += 30;
+    updateStats();
+    logAdventure("You trained Attack (+30 ATK) using 3,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk5k() {
+  if (stats.energy >= 5_000) {
+    stats.energy -= 5_000;
+    stats.atk += 50;
+    updateStats();
+    logAdventure("You trained Attack (+50 ATK) using 5,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk10k() {
+  if (stats.energy >= 10_000) {
+    stats.energy -= 10_000;
+    stats.atk += 100;
+    updateStats();
+    logAdventure("You trained Attack (+100 ATK) using 10,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk50k() {
+  if (stats.energy >= 50_000) {
+    stats.energy -= 50_000;
+    stats.atk += 500;
+    updateStats();
+    logAdventure("You trained Attack (+500 ATK) using 50,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk100k() {
+  if (stats.energy >= 100_000) {
+    stats.energy -= 100_000;
+    stats.atk += 1000;
+    updateStats();
+    logAdventure("You trained Attack (+1,000 ATK) using 100,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk1m() {
+  if (stats.energy >= 1_000_000) {
+    stats.energy -= 1_000_000;
+    stats.atk += 10_000;
+    updateStats();
+    logAdventure("You trained Attack (+10,000 ATK) using 1,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk10m() {
+  if (stats.energy >= 10_000_000) {
+    stats.energy -= 10_000_000;
+    stats.atk += 100_000;
+    updateStats();
+    logAdventure("You trained Attack (+100,000 ATK) using 10,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk100m() {
+  if (stats.energy >= 100_000_000) {
+    stats.energy -= 100_000_000;
+    stats.atk += 1_000_000;
+    updateStats();
+    logAdventure("You trained Attack (+1,000,000 ATK) using 100,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk1b() {
+  if (stats.energy >= 1_000_000_000) {
+    stats.energy -= 1_000_000_000;
+    stats.atk += 10_000_000;
+    updateStats();
+    logAdventure("You trained Attack (+10,000,000 ATK) using 1,000,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk10b() {
+  if (stats.energy >= 10_000_000_000) {
+    stats.energy -= 10_000_000_000;
+    stats.atk += 100_000_000;
+    updateStats();
+    logAdventure("You trained Attack (+100,000,000 ATK) using 10,000,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk100b() {
+  if (stats.energy >= 100_000_000_000) {
+    stats.energy -= 100_000_000_000;
+    stats.atk += 1_000_000_000;
+    updateStats();
+    logAdventure("You trained Attack (+1,000,000,000 ATK) using 100,000,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk1t() {
+  if (stats.energy >= 1_000_000_000_000) {
+    stats.energy -= 1_000_000_000_000;
+    stats.atk += 10_000_000_000;
+    updateStats();
+    logAdventure("You trained Attack (+10,000,000,000 ATK) using 1,000,000,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk10t() {
+  if (stats.energy >= 10_000_000_000_000) {
+    stats.energy -= 10_000_000_000_000;
+    stats.atk += 100_000_000_000;
+    updateStats();
+    logAdventure("You trained Attack (+100,000,000,000 ATK) using 10,000,000,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
+
+function buyAtk100t() {
+  if (stats.energy >= 100_000_000_000_000) {
+    stats.energy -= 100_000_000_000_000;
+    stats.atk += 1_000_000_000_000;
+    updateStats();
+    logAdventure("You trained Attack (+1,000,000,000,000 ATK) using 100,000,000,000,000 Energy!");
+  } else {
+    alert("Not enough Energy!");
+  }
+}
 
 updateStats();
