@@ -17,6 +17,12 @@ let stats = {
   rebirths: 0,
 };
 
+let inventory = [];
+let equipped = {
+  weapon: null,
+  armor: null
+};
+
 function updateStats() {
   document.getElementById("stat-energy").textContent = formatNum(stats.energy);
   document.getElementById("stat-mana").textContent = formatNum(stats.mana);
@@ -32,7 +38,8 @@ function updateStats() {
 
 function showTab(id) {
   document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-  document.getElementById("tab-" + id).classList.add('active');
+  const active = document.getElementById("tab-" + id);
+  if (active) active.classList.add("active");
 }
 
 function rebirth() {
@@ -48,7 +55,10 @@ function rebirth() {
     stats.playerHP = 100;
     stats.enemyHP = 325000000;
     stats.rebirthTime = 0;
+    inventory = [];
+    equipped = { weapon: null, armor: null };
     updateStats();
+    renderInventory();
     alert("You have rebirthed! Total Rebirths: " + stats.rebirths);
   } else {
     alert("Not strong enough to rebirth yet!");
@@ -85,16 +95,100 @@ function nuke() {
   }
 }
 
+function tossGold() {
+  if (stats.gold >= 100) {
+    stats.gold -= 100;
+    const outcome = Math.random();
+    if (outcome < 0.3) {
+      stats.energy += 500;
+      logAdventure("The Money Pit gifted you 500 Energy!");
+    } else if (outcome < 0.6) {
+      stats.mana += 500;
+      logAdventure("You gained 500 Magic from the pit!");
+    } else {
+      stats.atk += 1;
+      stats.def += 1;
+      logAdventure("The pit empowered your stats!");
+    }
+    updateStats();
+  } else {
+    alert("You need at least 100 Gold to toss!");
+  }
+}
+
+function startAdventure(zone) {
+  const enemies = ["Ratling", "Sewer Slime", "Toilet Ghost"];
+  const enemy = enemies[Math.floor(Math.random() * enemies.length)];
+  const reward = Math.floor(Math.random() * 100) + 50;
+  stats.gold += reward;
+  logAdventure(`You defeated a ${enemy} and looted ${reward} gold!`);
+  dropRandomItem();
+  updateStats();
+}
+
+function dropRandomItem() {
+  const types = ["weapon", "armor"];
+  const type = types[Math.floor(Math.random() * types.length)];
+  const item = {
+    name: type === "weapon" ? "Rusty Sword" : "Cracked Armor",
+    type: type,
+    atk: type === "weapon" ? 5 : 0,
+    def: type === "armor" ? 5 : 0
+  };
+  inventory.push(item);
+  logAdventure(`You found: ${item.name}`);
+  renderInventory();
+}
+
+function renderInventory() {
+  const grid = document.getElementById("inventory-grid");
+  grid.innerHTML = "";
+  inventory.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "inventory-item";
+    div.textContent = item.name;
+    div.onclick = () => equipItem(index);
+    grid.appendChild(div);
+  });
+}
+
+function equipItem(index) {
+  const item = inventory[index];
+  if (!item) return;
+
+  if (equipped[item.type]) {
+    stats.atk -= equipped[item.type].atk;
+    stats.def -= equipped[item.type].def;
+  }
+
+  equipped[item.type] = item;
+  stats.atk += item.atk;
+  stats.def += item.def;
+
+  logAdventure(`Equipped ${item.name}`);
+  updateStats();
+}
+
+function logAdventure(text) {
+  const log = document.getElementById("adventure-log");
+  const entry = document.createElement("p");
+  entry.textContent = text;
+  log.prepend(entry);
+}
+
 function saveGame() {
-  localStorage.setItem("nguSave", JSON.stringify(stats));
+  localStorage.setItem("nguSave", JSON.stringify({ stats, inventory, equipped }));
   alert("Game Saved!");
 }
 
 function loadGame() {
   const save = JSON.parse(localStorage.getItem("nguSave"));
   if (save) {
-    stats = { ...stats, ...save };
+    Object.assign(stats, save.stats);
+    inventory = save.inventory || [];
+    equipped = save.equipped || { weapon: null, armor: null };
     updateStats();
+    renderInventory();
     alert("Game Loaded!");
   }
 }
