@@ -1,6 +1,10 @@
 // Helper for scientific notation
 function formatNum(n) {
-  return n.toExponential(3).replace('+', '').toUpperCase();
+  if (n < 1e9) {
+    return Math.floor(n).toLocaleString(); // 123,456,789
+  } else {
+    return n.toExponential(3).replace('+', '').toUpperCase(); // 1.234E9
+  }
 }
 
 let stats = {
