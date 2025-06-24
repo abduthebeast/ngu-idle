@@ -37,16 +37,18 @@
         <button onclick="showTab('adventure')">Adventure</button>
         <button onclick="showTab('inventory')">Inventory</button>
         <button onclick="showTab('ngu')">NGU</button>
-        <!-- Add more as needed -->
       </div>
     </div>
 
     <!-- Right Content View -->
     <div id="right-panel" class="panel">
-      <div id="tab-basic" class="tab active">
+      <div id="tab-basic" class="tab">
         <h2>Basic Training</h2>
         <p>Train your Energy and Magic stats here.</p>
+        <button onclick="stats.atk += 1; updateStats();">Train Attack (E)</button>
+        <button onclick="stats.def += 1; updateStats();">Train Defense (M)</button>
       </div>
+
       <div id="tab-fight" class="tab">
         <h2>BOSS FIGHT</h2>
         <div class="fight-panel">
@@ -67,7 +69,33 @@
           You start feeling lost in the identical looking passageways, dripping with all sorts of goopy brown waste...
         </p>
       </div>
-      <!-- Additional tab panels go here -->
+
+      <div id="tab-money" class="tab">
+        <h2>Money Pit</h2>
+        <p>Toss in gold for random rewards!</p>
+        <button onclick="tossGold()">Toss 100G</button>
+      </div>
+
+      <div id="tab-adventure" class="tab">
+        <h2>Adventure Zones</h2>
+        <p>Explore areas for loot and XP.</p>
+        <button onclick="startAdventure('Sewers')">Enter Sewers</button>
+        <div id="adventure-log" class="scroll-box"></div>
+      </div>
+
+      <div id="tab-inventory" class="tab">
+        <h2>Inventory</h2>
+        <div id="inventory-grid" class="inventory-grid">
+          <!-- Items will be inserted here -->
+        </div>
+      </div>
+
+      <div id="tab-ngu" class="tab">
+        <h2>Numbers Go Up</h2>
+        <p>Spend energy and magic to boost stats permanently.</p>
+        <button onclick="stats.atk += 10; stats.energy -= 100; updateStats();">Upgrade ATK (100E)</button>
+        <button onclick="stats.def += 10; stats.mana -= 100; updateStats();">Upgrade DEF (100M)</button>
+      </div>
     </div>
   </div>
   <script src="script.js"></script>
