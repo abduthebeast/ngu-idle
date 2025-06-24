@@ -370,3 +370,168 @@ function buyAtk100t() {
 }
 
 updateStats();
+function buyDef1k() {
+  if (stats.mana >= 1_000) {
+    stats.mana -= 1_000;
+    stats.def += 10;
+    updateStats();
+    logAdventure("You trained Defense (+10 DEF) using 1,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef3k() {
+  if (stats.mana >= 3_000) {
+    stats.mana -= 3_000;
+    stats.def += 30;
+    updateStats();
+    logAdventure("You trained Defense (+30 DEF) using 3,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef5k() {
+  if (stats.mana >= 5_000) {
+    stats.mana -= 5_000;
+    stats.def += 50;
+    updateStats();
+    logAdventure("You trained Defense (+50 DEF) using 5,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef10k() {
+  if (stats.mana >= 10_000) {
+    stats.mana -= 10_000;
+    stats.def += 100;
+    updateStats();
+    logAdventure("You trained Defense (+100 DEF) using 10,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef50k() {
+  if (stats.mana >= 50_000) {
+    stats.mana -= 50_000;
+    stats.def += 500;
+    updateStats();
+    logAdventure("You trained Defense (+500 DEF) using 50,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef100k() {
+  if (stats.mana >= 100_000) {
+    stats.mana -= 100_000;
+    stats.def += 1_000;
+    updateStats();
+    logAdventure("You trained Defense (+1,000 DEF) using 100,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef1m() {
+  if (stats.mana >= 1_000_000) {
+    stats.mana -= 1_000_000;
+    stats.def += 10_000;
+    updateStats();
+    logAdventure("You trained Defense (+10,000 DEF) using 1,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef10m() {
+  if (stats.mana >= 10_000_000) {
+    stats.mana -= 10_000_000;
+    stats.def += 100_000;
+    updateStats();
+    logAdventure("You trained Defense (+100,000 DEF) using 10,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef100m() {
+  if (stats.mana >= 100_000_000) {
+    stats.mana -= 100_000_000;
+    stats.def += 1_000_000;
+    updateStats();
+    logAdventure("You trained Defense (+1,000,000 DEF) using 100,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef1b() {
+  if (stats.mana >= 1_000_000_000) {
+    stats.mana -= 1_000_000_000;
+    stats.def += 10_000_000;
+    updateStats();
+    logAdventure("You trained Defense (+10,000,000 DEF) using 1,000,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef10b() {
+  if (stats.mana >= 10_000_000_000) {
+    stats.mana -= 10_000_000_000;
+    stats.def += 100_000_000;
+    updateStats();
+    logAdventure("You trained Defense (+100,000,000 DEF) using 10,000,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef100b() {
+  if (stats.mana >= 100_000_000_000) {
+    stats.mana -= 100_000_000_000;
+    stats.def += 1_000_000_000;
+    updateStats();
+    logAdventure("You trained Defense (+1,000,000,000 DEF) using 100,000,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef1t() {
+  if (stats.mana >= 1_000_000_000_000) {
+    stats.mana -= 1_000_000_000_000;
+    stats.def += 10_000_000_000;
+    updateStats();
+    logAdventure("You trained Defense (+10,000,000,000 DEF) using 1,000,000,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef10t() {
+  if (stats.mana >= 10_000_000_000_000) {
+    stats.mana -= 10_000_000_000_000;
+    stats.def += 100_000_000_000;
+    updateStats();
+    logAdventure("You trained Defense (+100,000,000,000 DEF) using 10,000,000,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
+function buyDef100t() {
+  if (stats.mana >= 100_000_000_000_000) {
+    stats.mana -= 100_000_000_000_000;
+    stats.def += 1_000_000_000_000;
+    updateStats();
+    logAdventure("You trained Defense (+1,000,000,000,000 DEF) using 100,000,000,000,000 Mana!");
+  } else {
+    alert("Not enough Mana!");
+  }
+}
+
