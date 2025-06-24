@@ -1,10 +1,10 @@
 // Helper for scientific notation
 function formatNum(n) {
-  if (n < 1e9) {
-    return Math.floor(n).toLocaleString(); // 123,456,789
-  } else {
-    return n.toExponential(3).replace('+', '').toUpperCase(); // 1.234E9
-  }
+  if (n < 1e3) return Math.floor(n).toString();
+  if (n < 1e6) return (n / 1e3).toFixed(2) + "K";
+  if (n < 1e9) return (n / 1e6).toFixed(2) + "M";
+  if (n < 1e12) return (n / 1e9).toFixed(2) + "B";
+  return n.toExponential(3).replace('+', '').toUpperCase();
 }
 
 let stats = {
@@ -34,7 +34,7 @@ function updateStats() {
   document.getElementById("stat-hp").textContent = stats.hp;
   document.getElementById("stat-atk").textContent = stats.atk;
   document.getElementById("stat-def").textContent = stats.def;
-  document.getElementById("stat-gold").textContent = stats.gold;
+  document.getElementById("stat-gold").textContent = formatNum(stats.gold);
   document.getElementById("stat-rebirth-time").textContent = stats.rebirthTime.toFixed(1) + "s";
   document.getElementById("player-hp").textContent = stats.playerHP;
   document.getElementById("enemy-hp").textContent = formatNum(stats.enemyHP);
