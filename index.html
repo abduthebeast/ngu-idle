@@ -49,27 +49,27 @@
         <button onclick="stats.def += 1; updateStats();">Train Defense (M)</button>
       </div>
 
-      <div id="tab-fight" class="tab">
-        <h2>BOSS FIGHT</h2>
-        <div class="fight-panel">
-          <div class="character">
-            <h3>YOU</h3>
-            <div class="sprite-placeholder">[CHARACTER SPRITE]</div>
-            <div>HP: <span id="player-hp">100</span></div>
-          </div>
-          <div class="character">
-            <h3>A LARGE RAT</h3>
-            <div class="sprite-placeholder">[RAT SPRITE]</div>
-            <div>HP: <span id="enemy-hp">325.000E+6</span></div>
-          </div>
-        </div>
-        <button onclick="fight()">FIGHT</button>
-        <button onclick="nuke()">NUKE</button>
-        <p class="story-box">
-          You start feeling lost in the identical looking passageways, dripping with all sorts of goopy brown waste...
-        </p>
-      </div>
-
+      
+<div id="tab-fight" class="tab">
+  <h2>BOSS FIGHT</h2>
+  <div class="fight-panel">
+    <div class="character">
+      <h3>YOU</h3>
+      <div class="sprite-placeholder">[CHARACTER SPRITE]</div>
+      <div>HP: <span id="player-hp">100</span></div>
+    </div>
+    <div class="character">
+      <h3 id="enemy-name">A LARGE RAT</h3> <!-- Make this dynamic -->
+      <div class="sprite-placeholder">[RAT SPRITE]</div>
+      <div>HP: <span id="enemy-hp">325000000</span></div>
+    </div>
+  </div>
+  <button onclick="fight()">FIGHT</button>
+  <button onclick="nuke()">NUKE</button>
+  <p class="story-box">
+    You start feeling lost in the identical looking passageways, dripping with all sorts of goopy brown waste...
+  </p>
+</div>
       <div id="tab-money" class="tab">
         <h2>Money Pit</h2>
         <p>Toss in gold for random rewards!</p>
