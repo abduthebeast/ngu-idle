@@ -1,5 +1,3 @@
-window.addEventListener('DOMContentLoaded', () => {
-});
 // Helper for scientific notation
 function formatNum(n) {
   if (n < 1e3) return Math.floor(n).toString();
