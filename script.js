@@ -1,3 +1,5 @@
+window.addEventListener('DOMContentLoaded', () => {
+});
 // Helper for scientific notation
 function formatNum(n) {
   if (n < 1e3) return Math.floor(n).toString();
@@ -627,6 +629,9 @@ setInterval(() => {
   saveGame();
 }, 60000);
 
+window.addEventListener('DOMContentLoaded', () => {
+  // your entire script here, or at least your init code
+});
 updateBossDisplay();
 updateStats();
 renderInventory();
