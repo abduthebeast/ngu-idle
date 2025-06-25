@@ -61,7 +61,7 @@ updateBossDisplay();
     stats.def = 0;
     stats.gold = 0;
     stats.playerHP = 100;
-    stats.enemyHP = 325000000;
+    stats.enemyHP = bosses[currentBossIndex].hp;
     stats.rebirthTime = 0;
     inventory = [];
     equipped = { weapon: null, armor: null };
