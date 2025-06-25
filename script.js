@@ -559,3 +559,56 @@ let bosses = [
   { name: "Omega Blockage", hp: 1e9, reward: 500000, sprite: "[BLOCKAGE]" },
   { name: "Cosmic Plumber", hp: 1e10, reward: 2500000, sprite: "[COSMIC]" }
 ];
+
+// --- Offline Progress System ---
+
+// Modified saveGame to store lastSaveTime
+function saveGame() {
+  const saveData = {
+    stats,
+    inventory,
+    equipped,
+    lastSaveTime: Date.now()
+  };
+  localStorage.setItem("nguSave", JSON.stringify(saveData));
+  alert("Game Saved!");
+}
+
+// Modified loadGame to apply offline progress
+function loadGame() {
+  const save = JSON.parse(localStorage.getItem("nguSave"));
+  if (save) {
+    Object.assign(stats, save.stats);
+    inventory = save.inventory || [];
+    equipped = save.equipped || { weapon: null, armor: null };
+
+    const now = Date.now();
+    const offlineTime = now - (save.lastSaveTime || now);
+    applyOfflineProgress(offlineTime);
+
+    updateStats();
+    renderInventory();
+    alert("Game Loaded!");
+  }
+}
+
+// Function to apply offline gains based on milliseconds offline
+function applyOfflineProgress(msElapsed) {
+  const secondsOffline = msElapsed / 1000;
+
+  // Cap offline time to 24 hours (86400 seconds)
+  const cappedSeconds = Math.min(secondsOffline, 86400);
+
+  // Apply exponential growth scaled by offline seconds (match your existing growth rates)
+  stats.energy *= Math.pow(1.01, cappedSeconds);
+  stats.mana *= Math.pow(1.02, cappedSeconds);
+
+  stats.rebirthTime += cappedSeconds;
+
+  logAdventure(`You were offline for ${Math.floor(cappedSeconds)} seconds and gained some progress!`);
+}
+
+// Optional: Autosave every 60 seconds to keep timestamp updated
+setInterval(() => {
+  saveGame();
+}, 60000);
