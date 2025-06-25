@@ -8,6 +8,7 @@ function formatNum(n) {
   return n.toExponential(3).replace('+', '').toUpperCase();
 }
 
+let currentBossIndex = 0;
 let stats = {
   energy: 1e0,
   mana: 1e0,
@@ -49,6 +50,8 @@ function showTab(id) {
 
 function rebirth() {
   if (stats.atk >= 10 || stats.gold >= 1000) {
+    currentBossIndex = 0;
+updateBossDisplay();
     stats.rebirths++;
     stats.energy = 1;
     stats.mana = 1;
@@ -70,6 +73,12 @@ function rebirth() {
   }
 }
 
+function updateBossDisplay() {
+  const boss = bosses[currentBossIndex];
+  document.getElementById("enemy-name").textContent = boss.name;
+  document.getElementById("enemy-sprite").textContent = boss.sprite;
+}
+
 function fight() {
   const boss = bosses[currentBossIndex];
   const playerDamage = stats.atk;
@@ -81,8 +90,8 @@ function fight() {
   if (stats.enemyHP <= 0) {
     stats.gold += boss.reward;
     logAdventure(`✅ You defeated ${boss.name} and gained ${formatNum(boss.reward)} gold!`);
-
     // Progress to next boss
+    updateBossDisplay();
     if (currentBossIndex < bosses.length - 1) {
       currentBossIndex++;
       stats.enemyHP = bosses[currentBossIndex].hp;
@@ -90,7 +99,7 @@ function fight() {
     } else {
       stats.enemyHP = boss.hp; // loop final boss
       logAdventure(`💀 ${boss.name} returns stronger than ever!`);
-    }
+    }updateBossDisplay();
   }
   document.getElementById("enemy-name").textContent = bosses[currentBossIndex].name;
 document.getElementById("enemy-sprite").textContent = bosses[currentBossIndex].sprite;
@@ -614,3 +623,7 @@ function applyOfflineProgress(msElapsed) {
 setInterval(() => {
   saveGame();
 }, 60000);
+
+updateBossDisplay();
+updateStats();
+renderInventory();
