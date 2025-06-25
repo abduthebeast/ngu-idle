@@ -92,6 +92,8 @@ function fight() {
       logAdventure(`💀 ${boss.name} returns stronger than ever!`);
     }
   }
+  document.getElementById("enemy-name").textContent = bosses[currentBossIndex].name;
+document.getElementById("enemy-sprite").textContent = bosses[currentBossIndex].sprite;
 
   if (stats.playerHP <= 0) {
     stats.playerHP = stats.hp;
