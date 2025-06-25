@@ -71,32 +71,43 @@ function rebirth() {
 }
 
 function fight() {
-  let playerDamage = stats.atk;
-  let enemyDamage = 10;
+  const boss = bosses[currentBossIndex];
+  const playerDamage = stats.atk;
+  const enemyDamage = Math.max(1, boss.hp / 1000 - stats.def); // scales with boss
 
   stats.enemyHP -= playerDamage;
   stats.playerHP -= enemyDamage;
 
   if (stats.enemyHP <= 0) {
-    stats.gold += 100;
-    stats.enemyHP = 325000000;
-    alert("Victory! You gained 100 gold.");
+    stats.gold += boss.reward;
+    logAdventure(`✅ You defeated ${boss.name} and gained ${formatNum(boss.reward)} gold!`);
+
+    // Progress to next boss
+    if (currentBossIndex < bosses.length - 1) {
+      currentBossIndex++;
+      stats.enemyHP = bosses[currentBossIndex].hp;
+      logAdventure(`⚔️ New boss appears: ${bosses[currentBossIndex].name}`);
+    } else {
+      stats.enemyHP = boss.hp; // loop final boss
+      logAdventure(`💀 ${boss.name} returns stronger than ever!`);
+    }
   }
+
   if (stats.playerHP <= 0) {
-    stats.playerHP = 100;
-    stats.gold = Math.max(0, stats.gold - 50);
-    alert("You died! Lost 50 gold.");
+    stats.playerHP = stats.hp;
+    stats.gold = Math.max(0, stats.gold - 100);
+    logAdventure(`❌ You died and lost 100 gold.`);
   }
+
   updateStats();
 }
-
 function nuke() {
-  if (stats.energy >= 1e4) {
-    stats.energy -= 1e4;
+  if (stats.energy >= 10000) {
+    stats.energy -= 10000;
     stats.enemyHP = 0;
-    fight();
+    fight(); // triggers victory & progress
   } else {
-    alert("Not enough Energy to Nuke!");
+    alert("❌ Not enough Energy to Nuke! Requires 10,000.");
   }
 }
 
@@ -535,3 +546,16 @@ function buyDef100t() {
   }
 }
 
+let bosses = [
+  { name: "Ratling", hp: 100, reward: 20, sprite: "[RAT SPRITE]" },
+  { name: "Sewer Slime", hp: 300, reward: 50, sprite: "[SLIME]" },
+  { name: "Toilet Ghost", hp: 1000, reward: 150, sprite: "[GHOST]" },
+  { name: "Plunger Warrior", hp: 5000, reward: 500, sprite: "[PLUNGER]" },
+  { name: "Mold Titan", hp: 25000, reward: 1500, sprite: "[MOLD]" },
+  { name: "Sinkhole Horror", hp: 150000, reward: 4500, sprite: "[SINKHOLE]" },
+  { name: "Giga Hairball", hp: 1000000, reward: 12000, sprite: "[HAIRBALL]" },
+  { name: "Cursed Drain Lord", hp: 1e7, reward: 40000, sprite: "[DRAIN LORD]" },
+  { name: "The Forgotten Flush", hp: 1e8, reward: 150000, sprite: "[FLUSH]" },
+  { name: "Omega Blockage", hp: 1e9, reward: 500000, sprite: "[BLOCKAGE]" },
+  { name: "Cosmic Plumber", hp: 1e10, reward: 2500000, sprite: "[COSMIC]" }
+];
