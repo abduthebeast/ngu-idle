@@ -19,7 +19,7 @@ let stats = {
   gold: 0,
   rebirthTime: 0,
   playerHP: 100,
-  enemyHP: 325000000,
+enemyHP: bosses[0].hp,
   rebirths: 0,
 };
 
@@ -600,6 +600,9 @@ function loadGame() {
     updateStats();
     renderInventory();
     alert("Game Loaded!");
+    if (!stats.enemyHP || stats.enemyHP <= 0) {
+  stats.enemyHP = bosses[currentBossIndex].hp;
+}
   }
 }
 
