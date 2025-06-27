@@ -65,10 +65,12 @@ function updateStats() {
   document.getElementById("enemy-hp-text").textContent = `${formatNum(stats.enemyHP)} / ${formatNum(currentBoss.hp)}`;
 }
 
-function showTab(id) {
-  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-  const active = document.getElementById("tab-" + id);
-  if (active) active.classList.add("active");
+function showTab(tabId) {
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => tab.style.display = 'none');
+
+  const activeTab = document.getElementById(`tab-${tabId}`);
+  if (activeTab) activeTab.style.display = 'block';
 }
 
 function rebirth() {
