@@ -99,8 +99,16 @@ updateBossDisplay();
 function updateBossDisplay() {
   const boss = bosses[currentBossIndex];
   document.getElementById("enemy-name").textContent = boss.name;
-  document.getElementById("enemy-sprite").textContent = boss.sprite;
+
+  const fileName = boss.name
+    .toLowerCase()
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+    .replace(/[^a-z\-]/g, ''); // remove non-letter characters
+
+  const spritePath = `sprites/${fileName}.png`;
+  document.getElementById("enemy-sprite").innerHTML = `<img src="${spritePath}" alt="${boss.name}" style="max-height:100px;">`;
 }
+
 
 function fight() {
   const boss = bosses[currentBossIndex];
