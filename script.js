@@ -8,6 +8,20 @@ function formatNum(n) {
   return n.toExponential(3).replace('+', '').toUpperCase();
 }
 
+let bosses = [
+  { name: "Ratling", hp: 100, reward: 20, sprite: "[RAT SPRITE]" },
+  { name: "Sewer Slime", hp: 300, reward: 50, sprite: "[SLIME]" },
+  { name: "Toilet Ghost", hp: 1000, reward: 150, sprite: "[GHOST]" },
+  { name: "Plunger Warrior", hp: 5000, reward: 500, sprite: "[PLUNGER]" },
+  { name: "Mold Titan", hp: 25000, reward: 1500, sprite: "[MOLD]" },
+  { name: "Sinkhole Horror", hp: 150000, reward: 4500, sprite: "[SINKHOLE]" },
+  { name: "Giga Hairball", hp: 1000000, reward: 12000, sprite: "[HAIRBALL]" },
+  { name: "Cursed Drain Lord", hp: 1e7, reward: 40000, sprite: "[DRAIN LORD]" },
+  { name: "The Forgotten Flush", hp: 1e8, reward: 150000, sprite: "[FLUSH]" },
+  { name: "Omega Blockage", hp: 1e9, reward: 500000, sprite: "[BLOCKAGE]" },
+  { name: "Cosmic Plumber", hp: 1e10, reward: 2500000, sprite: "[COSMIC]" }
+];
+
 let currentBossIndex = 0;
 let stats = {
   energy: 1e0,
@@ -556,20 +570,6 @@ function buyDef100t() {
     alert("Not enough Mana!");
   }
 }
-
-let bosses = [
-  { name: "Ratling", hp: 100, reward: 20, sprite: "[RAT SPRITE]" },
-  { name: "Sewer Slime", hp: 300, reward: 50, sprite: "[SLIME]" },
-  { name: "Toilet Ghost", hp: 1000, reward: 150, sprite: "[GHOST]" },
-  { name: "Plunger Warrior", hp: 5000, reward: 500, sprite: "[PLUNGER]" },
-  { name: "Mold Titan", hp: 25000, reward: 1500, sprite: "[MOLD]" },
-  { name: "Sinkhole Horror", hp: 150000, reward: 4500, sprite: "[SINKHOLE]" },
-  { name: "Giga Hairball", hp: 1000000, reward: 12000, sprite: "[HAIRBALL]" },
-  { name: "Cursed Drain Lord", hp: 1e7, reward: 40000, sprite: "[DRAIN LORD]" },
-  { name: "The Forgotten Flush", hp: 1e8, reward: 150000, sprite: "[FLUSH]" },
-  { name: "Omega Blockage", hp: 1e9, reward: 500000, sprite: "[BLOCKAGE]" },
-  { name: "Cosmic Plumber", hp: 1e10, reward: 2500000, sprite: "[COSMIC]" }
-];
 
 // --- Offline Progress System ---
 
