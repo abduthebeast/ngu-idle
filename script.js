@@ -9,17 +9,17 @@ function formatNum(n) {
 }
 
 let bosses = [
-  { name: "Ratling", hp: 100, reward: 20, sprite: "[RAT SPRITE]" },
-  { name: "Sewer Slime", hp: 300, reward: 50, sprite: "[SLIME]" },
-  { name: "Toilet Ghost", hp: 1000, reward: 150, sprite: "[GHOST]" },
-  { name: "Plunger Warrior", hp: 5000, reward: 500, sprite: "[PLUNGER]" },
-  { name: "Mold Titan", hp: 25000, reward: 1500, sprite: "[MOLD]" },
-  { name: "Sinkhole Horror", hp: 150000, reward: 4500, sprite: "[SINKHOLE]" },
-  { name: "Giga Hairball", hp: 1000000, reward: 12000, sprite: "[HAIRBALL]" },
-  { name: "Cursed Drain Lord", hp: 1e7, reward: 40000, sprite: "[DRAIN LORD]" },
-  { name: "The Forgotten Flush", hp: 1e8, reward: 150000, sprite: "[FLUSH]" },
-  { name: "Omega Blockage", hp: 1e9, reward: 500000, sprite: "[BLOCKAGE]" },
-  { name: "Cosmic Plumber", hp: 1e10, reward: 2500000, sprite: "[COSMIC]" }
+  { name: "Ratling", hp: 100, reward: 20, sprite: "Ratling.png" },
+  { name: "Sewer Slime", hp: 300, reward: 50, sprite: "Sewer-slime.png" },
+  { name: "Toilet Ghost", hp: 1000, reward: 150, sprite: "Toilet-ghost.png" },
+  { name: "Plunger Warrior", hp: 5000, reward: 500, sprite: "Plunger-warrior.png" },
+  { name: "Mold Titan", hp: 25000, reward: 1500, sprite: "Mold-titan.png" },
+  { name: "Sinkhole Horror", hp: 150000, reward: 4500, sprite: "Sinkhole-horror.png" },
+  { name: "Giga Hairball", hp: 1000000, reward: 12000, sprite: "Giga-hairball.png" },
+  { name: "Cursed Drain Lord", hp: 10000000, reward: 40000, sprite: "Cursed-drain-lord.png" },
+  { name: "The Forgotten Flush", hp: 100000000, reward: 150000, sprite: "The-forgotten-flush.png" },
+  { name: "Omega Blockage", hp: 1000000000, reward: 500000, sprite: "Omega-blockage.png" },
+  { name: "Cosmic Plumber", hp: 10000000000, reward: 2500000, sprite: "Cosmic-plumber.png" }
 ];
 
 let currentBossIndex = 0;
