@@ -96,6 +96,18 @@ updateBossDisplay();
   }
 }
 
+function loadBoss(index) {
+  let boss = bosses[index];
+  currentBoss = { ...boss, currentHp: boss.hp };
+
+  // Update boss image
+  let img = document.getElementById("bossImage");
+  img.src = `images/bosses/${boss.sprite}`;
+  img.alt = boss.name;
+
+  // You might already be updating other stuff like name, HP bar, etc.
+}
+
 function updateBossDisplay() {
   const boss = bosses[currentBossIndex];
   document.getElementById("enemy-name").textContent = boss.name;
