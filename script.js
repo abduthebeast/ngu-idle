@@ -52,8 +52,17 @@ function updateStats() {
   document.getElementById("stat-def").textContent = stats.def;
   document.getElementById("stat-gold").textContent = formatNum(stats.gold);
   document.getElementById("stat-rebirth-time").textContent = stats.rebirthTime.toFixed(1) + "s";
-  document.getElementById("player-hp").textContent = stats.playerHP;
-  document.getElementById("enemy-hp").textContent = formatNum(stats.enemyHP);
+
+  // Update HP bar and text for player
+  const hpRatioPlayer = stats.playerHP / stats.hp;
+  document.getElementById("player-hp-bar").style.width = `${Math.max(0, Math.min(1, hpRatioPlayer)) * 100}%`;
+  document.getElementById("player-hp-text").textContent = `${Math.floor(stats.playerHP)} / ${Math.floor(stats.hp)}`;
+
+  // Update HP bar and text for enemy
+  const currentBoss = bosses[currentBossIndex];
+  const hpRatioEnemy = stats.enemyHP / currentBoss.hp;
+  document.getElementById("enemy-hp-bar").style.width = `${Math.max(0, Math.min(1, hpRatioEnemy)) * 100}%`;
+  document.getElementById("enemy-hp-text").textContent = `${formatNum(stats.enemyHP)} / ${formatNum(currentBoss.hp)}`;
 }
 
 function showTab(id) {
