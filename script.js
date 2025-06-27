@@ -104,6 +104,8 @@ function fight() {
   if (stats.enemyHP <= 0) {
     stats.gold += boss.reward;
     logAdventure(`✅ You defeated ${boss.name} and gained ${formatNum(boss.reward)} gold!`);
+    stats.playerHP = stats.hp;
+    
     // Progress to next boss
     updateBossDisplay();
     if (currentBossIndex < bosses.length - 1) {
@@ -410,6 +412,7 @@ function buyDef1k() {
   if (stats.mana >= 1_000) {
     stats.mana -= 1_000;
     stats.def += 10;
+    stats.hp = 100 + stats.def * 10;
     updateStats();
     logAdventure("You trained Defense (+10 DEF) using 1,000 Mana!");
   } else {
@@ -421,6 +424,9 @@ function buyDef3k() {
   if (stats.mana >= 3_000) {
     stats.mana -= 3_000;
     stats.def += 30;
+    stats.hp = 100 + stats.def * 10;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+30 DEF) using 3,000 Mana!");
   } else {
@@ -432,6 +438,8 @@ function buyDef5k() {
   if (stats.mana >= 5_000) {
     stats.mana -= 5_000;
     stats.def += 50;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+50 DEF) using 5,000 Mana!");
   } else {
@@ -443,6 +451,8 @@ function buyDef10k() {
   if (stats.mana >= 10_000) {
     stats.mana -= 10_000;
     stats.def += 100;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+100 DEF) using 10,000 Mana!");
   } else {
@@ -454,6 +464,8 @@ function buyDef50k() {
   if (stats.mana >= 50_000) {
     stats.mana -= 50_000;
     stats.def += 500;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+500 DEF) using 50,000 Mana!");
   } else {
@@ -465,6 +477,8 @@ function buyDef100k() {
   if (stats.mana >= 100_000) {
     stats.mana -= 100_000;
     stats.def += 1_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+1,000 DEF) using 100,000 Mana!");
   } else {
@@ -476,6 +490,8 @@ function buyDef1m() {
   if (stats.mana >= 1_000_000) {
     stats.mana -= 1_000_000;
     stats.def += 10_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+10,000 DEF) using 1,000,000 Mana!");
   } else {
@@ -487,6 +503,8 @@ function buyDef10m() {
   if (stats.mana >= 10_000_000) {
     stats.mana -= 10_000_000;
     stats.def += 100_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+100,000 DEF) using 10,000,000 Mana!");
   } else {
@@ -498,6 +516,8 @@ function buyDef100m() {
   if (stats.mana >= 100_000_000) {
     stats.mana -= 100_000_000;
     stats.def += 1_000_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+1,000,000 DEF) using 100,000,000 Mana!");
   } else {
@@ -509,6 +529,8 @@ function buyDef1b() {
   if (stats.mana >= 1_000_000_000) {
     stats.mana -= 1_000_000_000;
     stats.def += 10_000_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+10,000,000 DEF) using 1,000,000,000 Mana!");
   } else {
@@ -520,6 +542,8 @@ function buyDef10b() {
   if (stats.mana >= 10_000_000_000) {
     stats.mana -= 10_000_000_000;
     stats.def += 100_000_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+100,000,000 DEF) using 10,000,000,000 Mana!");
   } else {
@@ -531,6 +555,8 @@ function buyDef100b() {
   if (stats.mana >= 100_000_000_000) {
     stats.mana -= 100_000_000_000;
     stats.def += 1_000_000_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+1,000,000,000 DEF) using 100,000,000,000 Mana!");
   } else {
@@ -542,6 +568,8 @@ function buyDef1t() {
   if (stats.mana >= 1_000_000_000_000) {
     stats.mana -= 1_000_000_000_000;
     stats.def += 10_000_000_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+10,000,000,000 DEF) using 1,000,000,000,000 Mana!");
   } else {
@@ -553,6 +581,8 @@ function buyDef10t() {
   if (stats.mana >= 10_000_000_000_000) {
     stats.mana -= 10_000_000_000_000;
     stats.def += 100_000_000_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+100,000,000,000 DEF) using 10,000,000,000,000 Mana!");
   } else {
@@ -564,6 +594,8 @@ function buyDef100t() {
   if (stats.mana >= 100_000_000_000_000) {
     stats.mana -= 100_000_000_000_000;
     stats.def += 1_000_000_000_000;
+    stats.hp = 100 + stats.def * 10;
+
     updateStats();
     logAdventure("You trained Defense (+1,000,000,000,000 DEF) using 100,000,000,000,000 Mana!");
   } else {
